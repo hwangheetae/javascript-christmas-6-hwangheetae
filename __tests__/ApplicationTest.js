@@ -72,7 +72,8 @@ describe('기능 테스트', () => {
   test('날짜 판독하기', async () => {
     //given
     const dates = Array.from({ length: 31 }, (_, i) => `${i + 1}`);
-    const logSpy = getLogSpy();
+    const eventAlgorithm = new EventAlgorithm();
+
     const CHRISTMAS_EVENT_DAY = [
       '1',
       '2',
@@ -108,29 +109,26 @@ describe('기능 테스트', () => {
     const SPECIAL_EVENT_DAY = [3, 10, 17, 24, 25, 31];
 
     //when
+
     for (const date of dates) {
-      EventAlgorithm.determiningDate(date);
+      eventAlgorithm.determiningDate(date);
     }
 
     //then
-    const expectedLogs = [];
     dates.forEach((date) => {
-      expectedLogs.push(`입력받은 요일은 ${Number(date)}`);
       if (CHRISTMAS_EVENT_DAY.includes(Number(date))) {
-        expectedLogs.push('크리스마스 이벤트날!');
+        expect(eventAlgorithm.IS_CHRISTMAS_EVENT_DAY).toBe(true);
       }
       if (WEEKEND.includes(Number(date))) {
-        expectedLogs.push('주말!');
+        expect(eventAlgorithm.IS_WEEKEND).toBe(true);
       }
       if (WEEKDAY.includes(Number(date))) {
-        expectedLogs.push('평일!');
+        expect(eventAlgorithm.IS_WEEKDAY).toBe(true);
       }
       if (SPECIAL_EVENT_DAY.includes(Number(date))) {
-        expectedLogs.push('스페셜 이벤트날!');
+        expect(eventAlgorithm.IS_SPECIAL_EVENT).toBe(true);
       }
     });
-
-    expectLogContains(getOutput(logSpy), expectedLogs);
   });
 });
 
