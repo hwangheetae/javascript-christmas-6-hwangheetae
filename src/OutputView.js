@@ -51,11 +51,19 @@ const OutputView = {
     for (const category in MENU) {
       menuName.forEach((item) => {
         if (MENU[category][item]) {
-          totalPriceBeforeDisCount += MENU[category][item];
+          totalPriceBeforeDisCount += MENU[category][item] * menu[item];
         }
       });
     }
-    Console.print(`${totalPriceBeforeDisCount}원`);
+
+    Console.print(`${totalPriceBeforeDisCount}원\n`);
+
+    Console.print('<증정 메뉴>');
+    if (totalPriceBeforeDisCount > 120000) {
+      Console.print('샴페인 1개');
+    } else {
+      Console.print('없음');
+    }
   },
 };
 
