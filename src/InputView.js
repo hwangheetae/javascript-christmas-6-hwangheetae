@@ -34,6 +34,7 @@ const InputView = {
       const menuQuantity = Object.values(menu);
 
       try {
+        ErrorCheck.orderFormatCheck(input);
         ErrorCheck.orderMenuNameCheck(menuName);
         menuQuantity.forEach((quantity) => {
           ErrorCheck.orderMenuNumberCheck(quantity);
