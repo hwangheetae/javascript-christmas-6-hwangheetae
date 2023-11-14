@@ -1,7 +1,16 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class EventAlgorithm {
-  static determiningDate(date) {
+  constructor() {
+    this.IS_CHRISTMAS_EVENT_DAY = false;
+    this.IS_WEEKEND = false;
+    this.IS_WEEKDAY = false;
+    this.IS_SPECIAL_EVENT = false;
+    this.IS_GIFT_MENU = false;
+    this.IS_EVENT_BADGE = false;
+  }
+
+  determiningDate(date) {
     // 1~25일
     // 총주문금액 - (1000 +100 x (day -1))
     const CHRISTMAS_EVENT_DAY = Array.from({ length: 25 }, (_, i) => i + 1);
@@ -21,18 +30,18 @@ class EventAlgorithm {
     Console.print(`입력받은 요일은 ${Number(date)}`);
 
     if (CHRISTMAS_EVENT_DAY.includes(Number(date))) {
-      Console.print('크리스마스 이벤트날!');
+      this.IS_CHRISTMAS_EVENT_DAY = true;
     }
 
     if (WEEKEND.includes(Number(date))) {
-      Console.print('주말!');
+      this.IS_WEEKEND = true;
     }
     if (WEEKDAY.includes(Number(date))) {
-      Console.print('평일!');
+      this.IS_WEEKDAY = true;
     }
 
     if (SPECIAL_EVENT_DAY.includes(Number(date))) {
-      Console.print('스페셜 이벤트날!');
+      this.IS_SPECIAL_EVENT = true;
     }
   }
 }
