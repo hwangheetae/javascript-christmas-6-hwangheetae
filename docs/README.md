@@ -43,10 +43,10 @@
 
     1. 방문할 날짜 :heavy_check_mark:
        - 1~31 숫자 => ELSE:'ERROR' 출력, 다시 입력 :heavy_check_mark:
-    2. 주문할 메뉴와 개수
-       - 메뉴판 없는 음식 주문 => 'ERROR'출력, 다시 입력
-       - 메뉴 개수 **1 이상**의 **숫자**가 아니면=>'ERROR'출력, 다시 입력
-       - 메뉴 형식 다름 => 'ERROR'출력, 다시 입력
+    2. 주문할 메뉴와 개수 :heavy_check_mark:
+       - 메뉴판 없는 음식 주문 => 'ERROR'출력, 다시 입력 :heavy_check_mark:
+       - 메뉴 개수 **1 이상**의 **숫자**가 아니면=>'ERROR'출력, 다시 입력 :heavy_check_mark:
+       - 메뉴 형식 다름 => 'ERROR'출력, 다시 입력 :heavy_check_mark:
        - 중복메뉴 입력 =>'ERROR'출력, 다시 입력
 
 2.  출력내용
@@ -96,4 +96,7 @@
 ## 에러
 
 - 1~31 이내 숫자가 아닐때 **dateCheck()** :heavy_check_mark:
-- 메뉴판 없는 음식 주문 할 때 **orderMessageCheck** :heavy_check_mark:
+- 메뉴판 없는 음식 주문 할 때 **orderMessageCheck()** :heavy_check_mark:
+- 메뉴 개수가 1 이상의 숫자가 아닐때 **orderMenuNumberCheck()** :heavy_check_mark:
+- 메뉴 형식 다르면 **orderFormatCheck()** :heavy_check_mark:
+- 중복메뉴 입력 시 **orderOverlapCheck()** :heavy_check_mark:
