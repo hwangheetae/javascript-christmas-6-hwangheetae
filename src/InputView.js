@@ -42,6 +42,7 @@ const InputView = {
         });
         ErrorCheck.orderOverlapCheck(menuNameList);
         ErrorCheck.menuNumberMaxCheck(menuQuantity);
+        ErrorCheck.onlyBeverageCheck(menuName);
         return input;
 
         break;
