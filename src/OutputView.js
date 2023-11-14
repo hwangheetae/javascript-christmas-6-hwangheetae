@@ -38,7 +38,6 @@ const OutputView = {
     const menuName = Object.keys(menu);
     const menuQuantity = Object.values(menu);
 
-    Console.print('12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n');
     Console.print('<주문 메뉴>');
     for (let i = 0; i < menuName.length; i += 1) {
       Console.print(`${menuName[i]} ${menuQuantity[i]}개`);
@@ -56,7 +55,7 @@ const OutputView = {
       });
     }
 
-    Console.print(`${totalPriceBeforeDisCount}원\n`);
+    Console.print(`${totalPriceBeforeDisCount.toLocaleString()}원\n`);
 
     Console.print('<증정 메뉴>');
     if (totalPriceBeforeDisCount > 120000) {
