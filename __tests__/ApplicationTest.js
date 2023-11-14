@@ -72,7 +72,6 @@ describe('기능 테스트', () => {
   test('날짜 판독하기', async () => {
     //given
     const dates = Array.from({ length: 31 }, (_, i) => `${i + 1}`);
-    const dayCheck = new EventAlgorithm();
     const logSpy = getLogSpy();
     const CHRISTMAS_EVENT_DAY = [
       '1',
@@ -110,7 +109,7 @@ describe('기능 테스트', () => {
 
     //when
     for (const date of dates) {
-      dayCheck.determiningDate(date);
+      EventAlgorithm.determiningDate(date);
     }
 
     //then
