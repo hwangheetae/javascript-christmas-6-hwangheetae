@@ -1,4 +1,4 @@
-# 로직 요약
+# 로직
 
 ## 크리스마스 디데이 할인 이벤트
 
@@ -41,8 +41,8 @@
 
 1.  방문할 날짜 , 메뉴 선택
 
-    1. 방문할 날짜
-       - 1~31 숫자 => ELSE:'ERROR' 출력, 다시 입력
+    1. 방문할 날짜 :heavy_check_mark:
+       - 1~31 숫자 => ELSE:'ERROR' 출력, 다시 입력 :heavy_check_mark:
     2. 주문할 메뉴와 개수
        - 메뉴판 없는 음식 주문 => 'ERROR'출력, 다시 입력
        - 메뉴 개수 **1 이상**의 **숫자**가 아니면=>'ERROR'출력, 다시 입력
@@ -78,3 +78,22 @@
     - 12월 이벤트 배지 내역
       1. 총 혜택 금액에 따라 배지 이름 다르게
       2. IF 이벤트 배지 없으면 => "없음"
+
+# 구현 기능 목록
+
+## 기능
+
+- 방문할 날짜 입력받기 **readDate()** :heavy_check_mark:
+- 방문할 날짜 판독하기 **determiningDate()** :heavy_check_mark:
+- 메뉴 입력받기 **readMenu()** :heavy_check_mark:
+- 메뉴 출력하기 **printMenu()** :heavy_check_mark:
+
+## 테스트
+
+- 방문할 날짜 판독 테스트 **determiningDate() test** :heavy_check_mark:
+- 유효하지 않은 날짜 테스트 **dateCheck() test** :heavy_check_mark:
+
+## 에러
+
+- 1~31 이내 숫자가 아닐때 **dateCheck()** :heavy_check_mark:
+- 메뉴판 없는 음식 주문 할 때 **orderMessageCheck** :heavy_check_mark:
