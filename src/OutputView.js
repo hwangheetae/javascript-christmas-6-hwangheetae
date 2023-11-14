@@ -11,10 +11,10 @@ const OutputView = {
       menu[menuItem.trim()] = parseInt(quantity);
     });
 
-    const menuKey = Object.keys(menu);
+    const menuName = Object.keys(menu);
     const menuQuantity = Object.values(menu);
-    for (let i = 0; i < menuKey.length; i += 1) {
-      Console.print(`${menuKey[i]} ${menuQuantity[i]}개`);
+    for (let i = 0; i < menuName.length; i += 1) {
+      Console.print(`${menuName[i]} ${menuQuantity[i]}개`);
     }
   },
 };
