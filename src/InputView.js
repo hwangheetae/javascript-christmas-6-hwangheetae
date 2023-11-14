@@ -41,7 +41,7 @@ const InputView = {
           ErrorCheck.orderMenuNumberCheck(quantity);
         });
         ErrorCheck.orderOverlapCheck(menuNameList);
-
+        ErrorCheck.menuNumberMaxCheck(menuQuantity);
         return input;
 
         break;

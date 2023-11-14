@@ -63,6 +63,15 @@ class ErrorCheck {
       throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   }
+
+  static menuNumberMaxCheck(input) {
+    const sum = input.reduce((a, b) => a + b, 0);
+    if (sum > 20) {
+      throw new Error(
+        '[ERROR] 메뉴는 20개까지만 주문할 수 있습니다. 다시 주문해 주세요',
+      );
+    }
+  }
 }
 
 export default ErrorCheck;
