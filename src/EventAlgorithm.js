@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class EventAlgorithm {
-  determiningDate(date) {
+  static determiningDate(date) {
     // 1~25일
     // 총주문금액 - (1000 +100 x (day -1))
     const CHRISTMAS_EVENT_DAY = Array.from({ length: 25 }, (_, i) => i + 1);
