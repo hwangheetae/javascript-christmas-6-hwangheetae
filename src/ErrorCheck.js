@@ -6,7 +6,7 @@ class ErrorCheck {
     }
   }
 
-  static orderMessageCheck(input) {
+  static orderMenuNameCheck(input) {
     const MENU = {
       //category
       애피타이저: {
@@ -40,6 +40,13 @@ class ErrorCheck {
       MENU_NAME_LIST.includes(item),
     );
     if (!isValidNameOrder) {
+      throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
+    }
+  }
+
+  static orderMenuNumberCheck(input) {
+    input = Number(input);
+    if (input < 1 || isNaN(input)) {
       throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   }

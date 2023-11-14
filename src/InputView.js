@@ -35,7 +35,12 @@ const InputView = {
 
       try {
         ErrorCheck.orderMenuNameCheck(menuName);
+        menuQuantity.forEach((quantity) => {
+          ErrorCheck.orderMenuNumberCheck(quantity);
+        });
+
         return input;
+
         break;
       } catch (error) {
         Console.print(error.message);
