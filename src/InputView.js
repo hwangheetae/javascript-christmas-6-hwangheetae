@@ -24,6 +24,7 @@ const InputView = {
       );
       const menuItems = input.split(',');
       const menu = {};
+      const menuNameList = menuItems.map((item) => item.split('-')[0].trim());
 
       menuItems.forEach((item) => {
         const [menuItem, quantity] = item.split('-');
@@ -39,6 +40,7 @@ const InputView = {
         menuQuantity.forEach((quantity) => {
           ErrorCheck.orderMenuNumberCheck(quantity);
         });
+        ErrorCheck.orderOverlapCheck(menuNameList);
 
         return input;
 
