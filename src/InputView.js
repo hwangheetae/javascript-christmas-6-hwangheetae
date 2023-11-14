@@ -31,9 +31,10 @@ const InputView = {
       });
 
       const menuName = Object.keys(menu);
+      const menuQuantity = Object.values(menu);
 
       try {
-        ErrorCheck.orderMessageCheck(menuName);
+        ErrorCheck.orderMenuNameCheck(menuName);
         return input;
         break;
       } catch (error) {

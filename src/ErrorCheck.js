@@ -36,8 +36,10 @@ class ErrorCheck {
       return acc.concat(Object.keys(category));
     }, []);
 
-    const isValidOrder = input.every((item) => MENU_NAME_LIST.includes(item));
-    if (!isValidOrder) {
+    const isValidNameOrder = input.every((item) =>
+      MENU_NAME_LIST.includes(item),
+    );
+    if (!isValidNameOrder) {
       throw new Error('[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.');
     }
   }
