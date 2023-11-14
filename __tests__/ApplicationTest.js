@@ -159,7 +159,12 @@ describe('예외 테스트', () => {
       '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.';
     const INPUTS_TO_END = ['해산물파스타-2'];
     const logSpy = getLogSpy();
-    mockQuestions(['3', '제로콜라-a', ...INPUTS_TO_END]);
+    mockQuestions([
+      '3',
+      '제로콜라-a',
+      '제로콜라-15,해산물파스타-10',
+      ...INPUTS_TO_END,
+    ]);
 
     // when
     const app = new App();
