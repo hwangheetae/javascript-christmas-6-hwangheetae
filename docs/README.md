@@ -34,8 +34,8 @@
 ## 조건
 
 - 총주문금액 1만원 이상부터 적용
-- 음료만 주문시 주문 X
-- 메뉴 최대 20개
+- 음료만 주문시 주문 X :heavy_check_mark:
+- 메뉴 최대 20개 :heavy_check_mark:
 
 # 개발요청사항
 
@@ -47,19 +47,19 @@
        - 메뉴판 없는 음식 주문 => 'ERROR'출력, 다시 입력 :heavy_check_mark:
        - 메뉴 개수 **1 이상**의 **숫자**가 아니면=>'ERROR'출력, 다시 입력 :heavy_check_mark:
        - 메뉴 형식 다름 => 'ERROR'출력, 다시 입력 :heavy_check_mark:
-       - 중복메뉴 입력 =>'ERROR'출력, 다시 입력
+       - 중복메뉴 입력 =>'ERROR'출력, 다시 입력 :heavy_check_mark:
 
 2.  출력내용
 
-    - 주문 메뉴
+    - 주문 메뉴 :heavy_check_mark:
 
-      1. 출력순서 자유
+      1. 출력순서 자유 :heavy_check_mark:
 
-    - 할인 전 총 주문 금액
+    - 할인 전 총 주문 금액 :heavy_check_mark:
 
     - 증정메뉴
 
-      1. IF 없으면 => 증정메뉴 "없음"
+      1. IF 없으면 => 증정메뉴 "없음" :heavy_check_mark:
 
     - 혜택 내역
 
@@ -84,7 +84,7 @@
 ## 기능
 
 - 방문할 날짜 입력받기 **readDate()** :heavy_check_mark:
-- 방문할 날짜 판독하기 **determiningDate()** :heavy_check_mark:
+- 방문할 날짜 판독하기 **determiningDㅎate()** :heavy_check_mark:
 - 메뉴 입력받기 **readMenu()** :heavy_check_mark:
 - 메뉴 출력하기 **printMenu()** :heavy_check_mark:
 
@@ -100,3 +100,5 @@
 - 메뉴 개수가 1 이상의 숫자가 아닐때 **orderMenuNumberCheck()** :heavy_check_mark:
 - 메뉴 형식 다르면 **orderFormatCheck()** :heavy_check_mark:
 - 중복메뉴 입력 시 **orderOverlapCheck()** :heavy_check_mark:
+- 음료만 주문시 주문 X onlyBeverageCheck() :heavy_check_mark:
+- 메뉴 최대 20개 menuNumberMaxCheck() :heavy_check_mark:

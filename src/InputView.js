@@ -1,5 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import ErrorCheck from './ErrorCheck.js';
+import EventAlgorithm from './EventAlgorithm.js';
+
+const event_algorithm = new EventAlgorithm();
 
 const InputView = {
   async readDate() {
@@ -22,27 +25,18 @@ const InputView = {
       const input = await Console.readLineAsync(
         '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n',
       );
-      const menuItems = input.split(',');
-      const menu = {};
-      const menuNameList = menuItems.map((item) => item.split('-')[0].trim());
-
-      menuItems.forEach((item) => {
-        const [menuItem, quantity] = item.split('-');
-        menu[menuItem.trim()] = parseInt(quantity);
-      });
-
-      const menuName = Object.keys(menu);
-      const menuQuantity = Object.values(menu);
+      const { menu, menuName, menuQuantity, menuNameList } =
+        event_algorithm.userOrder(input);
 
       try {
         ErrorCheck.orderFormatCheck(input);
-        ErrorCheck.orderMenuNameCheck(menuName);
+        ErrorCheck.orderMenuNameCheck(event_algorithm, menuName);
         menuQuantity.forEach((quantity) => {
           ErrorCheck.orderMenuNumberCheck(quantity);
         });
         ErrorCheck.orderOverlapCheck(menuNameList);
         ErrorCheck.menuNumberMaxCheck(menuQuantity);
-        ErrorCheck.onlyBeverageCheck(menuName);
+        ErrorCheck.onlyBeverageCheck(event_algorithm, menuName);
         return input;
 
         break;

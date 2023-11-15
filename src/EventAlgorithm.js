@@ -1,5 +1,30 @@
 import { Console } from '@woowacourse/mission-utils';
 
+const MENU = {
+  //category
+  애피타이저: {
+    //name       //price
+    양송이수프: 6000,
+    타파스: 5500,
+    시저샐러드: 8000,
+  },
+  메인: {
+    티본스테이크: 55000,
+    바비큐립: 54000,
+    해산물파스타: 35000,
+    크리스마스파스타: 25000,
+  },
+  디저트: {
+    초코케이크: 15000,
+    아이스크림: 5000,
+  },
+  음료: {
+    제로콜라: 3000,
+    레드와인: 60000,
+    샴페인: 25000,
+  },
+};
+
 class EventAlgorithm {
   constructor() {
     this.IS_CHRISTMAS_EVENT_DAY = false;
@@ -42,6 +67,61 @@ class EventAlgorithm {
 
     if (SPECIAL_EVENT_DAY.includes(Number(date))) {
       this.IS_SPECIAL_EVENT = true;
+    }
+  }
+
+  userOrder(input) {
+    const menuItems = input.split(',');
+
+    const menu = {};
+    const menuNameList = menuItems.map((item) => item.split('-')[0].trim());
+
+    menuItems.forEach((item) => {
+      const [menuItem, quantity] = item.split('-');
+      menu[menuItem.trim()] = parseInt(quantity);
+    });
+
+    const menuName = Object.keys(menu);
+    const menuQuantity = Object.values(menu);
+
+    return { menu, menuName, menuQuantity, menuNameList };
+  }
+
+  findOrderInMenu(input) {
+    const MENU_NAME_LIST = Object.values(MENU).reduce((acc, category) => {
+      return acc.concat(Object.keys(category));
+    }, []);
+
+    const isValidNameOrder = input.every((item) =>
+      MENU_NAME_LIST.includes(item),
+    );
+
+    return isValidNameOrder;
+  }
+
+  orderBeverageOnly(input) {
+    const isOnlyBeverages = input.every((item) => {
+      return Object.keys(MENU.음료).includes(item);
+    });
+    return isOnlyBeverages;
+  }
+
+  calculateTotalPriceBeforeDisCount(menu, menuName) {
+    let totalPriceBeforeDisCount = 0;
+
+    for (const category in MENU) {
+      menuName.forEach((item) => {
+        if (MENU[category][item]) {
+          totalPriceBeforeDisCount += MENU[category][item] * menu[item];
+        }
+      });
+    }
+    return totalPriceBeforeDisCount;
+  }
+
+  willGetGiftMenu(price) {
+    if (price > 120000) {
+      this.IS_GIFT_MENU = true;
     }
   }
 }
