@@ -106,6 +106,7 @@
 - 방문할 날짜 판독 테스트 **determiningDate() test** :heavy_check_mark:
 - 유효하지 않은 날짜 테스트 **dateCheck() test** :heavy_check_mark:
 - 에러 테스트 추가 :heavy_check_mark:
+- 핵심 로직 테스트 추가 :heavy_check_mark:
 
 ### 에러
 

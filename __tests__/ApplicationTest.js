@@ -69,7 +69,7 @@ describe('기능 테스트', () => {
     expectLogContains(getOutput(logSpy), expected);
   });
 
-  test('날짜 판독하기 determiningDate()', async () => {
+  test('determiningDate() 테스트: ', async () => {
     //given
     const dates = Array.from({ length: 31 }, (_, i) => `${i + 1}`);
     const eventAlgorithm = new EventAlgorithm();
@@ -145,26 +145,160 @@ describe('기능 테스트', () => {
   });
 });
 
-describe('findOrderInMenu() 테스트', () => {
+describe('주요 로직 테스트', () => {
   let eventAlgorithm;
 
   beforeEach(() => {
     eventAlgorithm = new EventAlgorithm();
   });
 
-  test('모든 주문 항목이 메뉴에 있는 경우 true를 반환합니다', () => {
+  test('findOrderInMenu(): 모든 주문 항목이 메뉴에 있는 경우', () => {
     const input = ['티본스테이크', '바비큐립', '초코케이크'];
     expect(eventAlgorithm.findOrderInMenu(input)).toBe(true);
   });
 
-  test('일부 주문 항목이 메뉴에 없는 경우 false를 반환합니다', () => {
-    const input = ['티본스테이크', '바비큐립', '미지의음식'];
+  test('findOrderInMenu(): 주문 항목이 메뉴에 없는 경우', () => {
+    const input = ['티본스테이크', '바비큐립', '김치'];
     expect(eventAlgorithm.findOrderInMenu(input)).toBe(false);
   });
 
-  test('주문 항목이 모두 메뉴에 없는 경우 false를 반환합니다', () => {
-    const input = ['미지의음식1', '미지의음식2'];
-    expect(eventAlgorithm.findOrderInMenu(input)).toBe(false);
+  test('orderBeverageOnly(): 주문이 음료만 포함하는 경우', () => {
+    const input = ['제로콜라', '레드와인'];
+    expect(eventAlgorithm.orderBeverageOnly(input)).toBe(true);
+  });
+
+  test('orderBeverageOnly(): 주문이 음료 외의 다른 항목을 포함하는 경우', () => {
+    const input = ['제로콜라', '티본스테이크'];
+    expect(eventAlgorithm.orderBeverageOnly(input)).toBe(false);
+  });
+
+  test('calculateTotalPriceBeforeDisCount() 테스트:', () => {
+    const menu = { 티본스테이크: 1, 제로콜라: 2, 초코케이크: 1 };
+    const menuName = ['티본스테이크', '제로콜라', '초코케이크'];
+    expect(
+      eventAlgorithm.calculateTotalPriceBeforeDisCount(menu, menuName),
+    ).toBe(55000 + 3000 * 2 + 15000);
+  });
+});
+
+describe('핵심 로직: calculateBenefitDetail() 테스트', () => {
+  let eventAlgorithm;
+
+  beforeEach(() => {
+    eventAlgorithm = new EventAlgorithm();
+  });
+
+  test('크리스마스 이벤트', () => {
+    eventAlgorithm.IS_CHRISTMAS_EVENT_DAY = true;
+    const date = '25';
+    const menu = { 크리스마스파스타: 1 };
+    const menuNameList = ['크리스마스파스타'];
+    const totalPriceBeforeDisCount = 25000;
+
+    const result = eventAlgorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
+    expect(result.christmas_discount).toBe(-(1000 + 100 * (Number(date) - 1)));
+  });
+
+  test('주말 할인', () => {
+    eventAlgorithm.IS_WEEKEND = true;
+    const date = '9';
+    const menu = { 티본스테이크: 2 };
+    const menuNameList = ['티본스테이크'];
+    const totalPriceBeforeDisCount = 110000;
+
+    const result = eventAlgorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
+    expect(result.weekend_discount).toBe(-2023 * 2);
+  });
+
+  test('평일 할인', () => {
+    eventAlgorithm.IS_WEEKDAY = true;
+    const date = '5';
+    const menu = { 초코케이크: 3 };
+    const menuNameList = ['초코케이크'];
+    const totalPriceBeforeDisCount = 45000;
+
+    const result = eventAlgorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
+    expect(result.weekday_discount).toBe(-2023 * 3);
+  });
+
+  test('특별 이벤트 할인', () => {
+    eventAlgorithm.IS_SPECIAL_EVENT = true;
+    const date = '10';
+    const menu = { 해산물파스타: 1 };
+    const menuNameList = ['해산물파스타'];
+    const totalPriceBeforeDisCount = 35000;
+
+    const result = eventAlgorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
+    expect(result.special_discount).toBe(-1000);
+  });
+
+  test('증정 메뉴 할인', () => {
+    eventAlgorithm.IS_GIFT_MENU = true;
+    const date = '15';
+    const menu = { 바비큐립: 3 };
+    const menuNameList = ['바비큐립'];
+    const totalPriceBeforeDisCount = 162000;
+
+    const result = eventAlgorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
+    expect(result.giftmenu_discount).toBe(-25000);
+  });
+});
+
+describe('예외 테스트: calculateBenefitDetail()', () => {
+  let eventAlgorithm;
+
+  beforeEach(() => {
+    eventAlgorithm = new EventAlgorithm();
+    eventAlgorithm.IS_CHRISTMAS_EVENT_DAY = true;
+    eventAlgorithm.IS_WEEKEND = true;
+    eventAlgorithm.IS_WEEKDAY = false;
+    eventAlgorithm.IS_SPECIAL_EVENT = true;
+    eventAlgorithm.IS_GIFT_MENU = true;
+  });
+
+  test('할인 전 총 가격이 10000원 미만일 경우 할인X', () => {
+    const date = '25';
+    const menu = { 제로콜라: 1 };
+    const menuNameList = ['제로콜라'];
+    const totalPriceBeforeDisCount = 3000;
+
+    const result = eventAlgorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
+
+    expect(result.christmas_discount).toBe(0);
+    expect(result.weekend_discount).toBe(0);
+    expect(result.weekday_discount).toBe(0);
+    expect(result.special_discount).toBe(0);
+    expect(result.giftmenu_discount).toBe(0);
   });
 });
 
