@@ -153,6 +153,7 @@ class EventAlgorithm {
     let weekend_discount = 0;
     let special_discount = 0;
     let giftmenu_discount = 0;
+
     if (totalPriceBeforeDisCount >= 10000) {
       if (this.IS_CHRISTMAS_EVENT_DAY) {
         christmas_discount = -(1000 + 100 * (Number(date) - 1));
