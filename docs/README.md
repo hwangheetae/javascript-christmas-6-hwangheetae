@@ -97,11 +97,15 @@
 - 방문할 날짜 판독하기 **determiningDㅎate()** :heavy_check_mark:
 - 메뉴 입력받기 **readMenu()** :heavy_check_mark:
 - 메뉴 출력하기 **printMenu()** :heavy_check_mark:
+- 증정메뉴 유무 판별
+- 할인전 총 주문 금액 계산 :heavy_check_mark:
+- 혜택내역판별 완성 :heavy_check_mark:
 
 ### 테스트
 
 - 방문할 날짜 판독 테스트 **determiningDate() test** :heavy_check_mark:
 - 유효하지 않은 날짜 테스트 **dateCheck() test** :heavy_check_mark:
+- 에러 테스트 추가 :heavy_check_mark:
 
 ### 에러
 
@@ -112,3 +116,5 @@
 - 중복메뉴 입력 시 **orderOverlapCheck()** :heavy_check_mark:
 - 음료만 주문시 주문 **X onlyBeverageCheck()** :heavy_check_mark:
 - 메뉴 최대 20개 **menuNumberMaxCheck()** :heavy_check_mark:
+
+- 10000원 이하 일때는 혜택 없음 추가 :heavy_check_mark:
