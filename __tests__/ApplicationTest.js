@@ -69,7 +69,7 @@ describe('기능 테스트', () => {
     expectLogContains(getOutput(logSpy), expected);
   });
 
-  test('날짜 판독하기', async () => {
+  test('날짜 판독하기 determiningDate()', async () => {
     //given
     const dates = Array.from({ length: 31 }, (_, i) => `${i + 1}`);
     const eventAlgorithm = new EventAlgorithm();
@@ -129,6 +129,42 @@ describe('기능 테스트', () => {
         expect(eventAlgorithm.IS_SPECIAL_EVENT).toBe(true);
       }
     });
+  });
+
+  test('userOrder() return 테스트', () => {
+    const eventAlgorithm = new EventAlgorithm();
+    const input = '티본스테이크-1,바비큐립-2,초코케이크-1';
+    const result = eventAlgorithm.userOrder(input);
+
+    expect(result).toEqual({
+      menu: { 티본스테이크: 1, 바비큐립: 2, 초코케이크: 1 },
+      menuName: ['티본스테이크', '바비큐립', '초코케이크'],
+      menuQuantity: [1, 2, 1],
+      menuNameList: ['티본스테이크', '바비큐립', '초코케이크'],
+    });
+  });
+});
+
+describe('findOrderInMenu() 테스트', () => {
+  let eventAlgorithm;
+
+  beforeEach(() => {
+    eventAlgorithm = new EventAlgorithm();
+  });
+
+  test('모든 주문 항목이 메뉴에 있는 경우 true를 반환합니다', () => {
+    const input = ['티본스테이크', '바비큐립', '초코케이크'];
+    expect(eventAlgorithm.findOrderInMenu(input)).toBe(true);
+  });
+
+  test('일부 주문 항목이 메뉴에 없는 경우 false를 반환합니다', () => {
+    const input = ['티본스테이크', '바비큐립', '미지의음식'];
+    expect(eventAlgorithm.findOrderInMenu(input)).toBe(false);
+  });
+
+  test('주문 항목이 모두 메뉴에 없는 경우 false를 반환합니다', () => {
+    const input = ['미지의음식1', '미지의음식2'];
+    expect(eventAlgorithm.findOrderInMenu(input)).toBe(false);
   });
 });
 
