@@ -76,8 +76,6 @@ class EventAlgorithm {
     // => 총 주문 금액 - 1000원 할인
     const SPECIAL_EVENT_DAY = [3, 10, 17, 24, 25, 31];
 
-    Console.print(`입력받은 요일은 ${Number(date)}`);
-
     if (CHRISTMAS_EVENT_DAY.includes(Number(date))) {
       this.IS_CHRISTMAS_EVENT_DAY = true;
     }
@@ -147,6 +145,61 @@ class EventAlgorithm {
     if (price > 120000) {
       this.IS_GIFT_MENU = true;
     }
+  }
+
+  calculateBenefitDetail(date, menu, menuNameList) {
+    let christmas_discount = 0;
+    let weekday_discount = 0;
+    let weekend_discount = 0;
+    let special_discount = 0;
+    let giftmenu_discount = 0;
+
+    if (this.IS_CHRISTMAS_EVENT_DAY) {
+      christmas_discount = -(1000 + 100 * (Number(date) - 1));
+    }
+
+    if (this.IS_WEEKEND) {
+      let count = 0;
+      menuNameList.forEach((item) => {
+        if (this.findCategoryOfMenu(item) === '메인') {
+          count += menu[item];
+        }
+      });
+      weekend_discount = -2023 * count;
+    }
+
+    if (this.IS_WEEKDAY) {
+      let count = 0;
+      menuNameList.forEach((item) => {
+        if (this.findCategoryOfMenu(item) === '디저트') {
+          count += menu[item];
+        }
+      });
+      weekday_discount = -2023 * count;
+    }
+    if (this.IS_SPECIAL_EVENT) {
+      special_discount = -1000;
+    }
+    if (this.IS_GIFT_MENU) {
+      giftmenu_discount = -25000;
+    }
+
+    return {
+      christmas_discount,
+      weekday_discount,
+      weekend_discount,
+      special_discount,
+      giftmenu_discount,
+    };
+  }
+
+  findCategoryOfMenu(menuItem) {
+    for (const category in MENU) {
+      if (Object.keys(MENU[category]).includes(menuItem)) {
+        return category;
+      }
+    }
+    return null;
   }
 }
 
