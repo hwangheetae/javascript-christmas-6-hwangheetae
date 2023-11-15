@@ -35,6 +35,30 @@ class EventAlgorithm {
     this.IS_EVENT_BADGE = false;
   }
 
+  get isChristmasEventDay() {
+    return this.IS_CHRISTMAS_EVENT_DAY;
+  }
+
+  get isWeekend() {
+    return this.IS_WEEKEND;
+  }
+
+  get isWeekday() {
+    return this.IS_WEEKDAY;
+  }
+
+  get isSpecialEvent() {
+    return this.IS_SPECIAL_EVENT;
+  }
+
+  get isGiftMenu() {
+    return this.IS_GIFT_MENU;
+  }
+
+  get isEventBadge() {
+    return this.IS_EVENT_BADGE;
+  }
+
   determiningDate(date) {
     // 1~25일
     // 총주문금액 - (1000 +100 x (day -1))

@@ -1,5 +1,4 @@
 import { Console } from '@woowacourse/mission-utils';
-import EventAlgorithm from './EventAlgorithm.js';
 
 const OutputView = {
   printGuideWord(date) {
@@ -8,9 +7,7 @@ const OutputView = {
     );
   },
 
-  printMenu(input) {
-    const event_algorithm = new EventAlgorithm();
-
+  printMenu(event_algorithm, input) {
     const { menu, menuName, menuQuantity, menuNameList } =
       event_algorithm.userOrder(input);
 
@@ -26,6 +23,7 @@ const OutputView = {
     );
 
     this.printGiftMenu(Number(event_algorithm.IS_GIFT_MENU));
+    this.printBenefitsDetail(event_algorithm);
   },
 
   printOrder(menuName, menuQuantity) {
@@ -47,10 +45,20 @@ const OutputView = {
   printGiftMenu(valid) {
     Console.print('<증정 메뉴>');
     if (valid) {
-      Console.print('샴페인 1개');
+      Console.print('샴페인 1개\n');
     } else {
-      Console.print('없음');
+      Console.print('없음\n');
     }
+  },
+
+  printBenefitsDetail(event_algorithm) {
+    Console.print('<혜택 내역>');
+    Console.print(`크리스마스${event_algorithm.isChristmasEventDay}`);
+    Console.print(`주말${event_algorithm.isWeekend}`);
+    Console.print(`평일${event_algorithm.isWeekday}`);
+    Console.print(`스페셜이벤트${event_algorithm.isSpecialEvent}`);
+    Console.print(`증정${event_algorithm.isGiftMenu}`);
+    Console.print(`이벤트뱃지${event_algorithm.isEventBadge}`);
   },
 };
 

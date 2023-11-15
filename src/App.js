@@ -5,12 +5,12 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
+    const event_algorithm = new EventAlgorithm();
     const date = await InputView.readDate();
-    const menu = await InputView.readMenu();
-    Console.print(
-      `12월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n`,
-    );
-    OutputView.printMenu(menu);
+    const menu = await InputView.readMenu(event_algorithm);
+    event_algorithm.determiningDate(date);
+    OutputView.printGuideWord(date);
+    OutputView.printMenu(event_algorithm, menu);
   }
 }
 
