@@ -32,6 +32,7 @@ const OutputView = {
       date,
       menuNameList,
       menu,
+      totalPriceBeforeDisCount,
     );
     this.printTotalDiscount(total_discount);
     this.printFinalPrice(
@@ -67,7 +68,13 @@ const OutputView = {
     }
   },
 
-  printBenefitsDetail(event_algorithm, date, menuNameList, menu) {
+  printBenefitsDetail(
+    event_algorithm,
+    date,
+    menuNameList,
+    menu,
+    totalPriceBeforeDisCount,
+  ) {
     let total_discount = 0;
 
     Console.print('<혜택 내역>');
@@ -78,7 +85,12 @@ const OutputView = {
       weekend_discount,
       special_discount,
       giftmenu_discount,
-    } = event_algorithm.calculateBenefitDetail(date, menu, menuNameList);
+    } = event_algorithm.calculateBenefitDetail(
+      date,
+      menu,
+      menuNameList,
+      totalPriceBeforeDisCount,
+    );
 
     if (christmas_discount != 0) {
       Console.print(
@@ -145,6 +157,3 @@ const OutputView = {
 };
 
 export default OutputView;
-// 5천이상: 별
-// 1만원 이상 : 트리
-// 2만원 이상 : 산타

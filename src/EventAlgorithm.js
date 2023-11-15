@@ -147,41 +147,44 @@ class EventAlgorithm {
     }
   }
 
-  calculateBenefitDetail(date, menu, menuNameList) {
+  calculateBenefitDetail(date, menu, menuNameList, totalPriceBeforeDisCount) {
     let christmas_discount = 0;
     let weekday_discount = 0;
     let weekend_discount = 0;
     let special_discount = 0;
     let giftmenu_discount = 0;
+    if (totalPriceBeforeDisCount >= 10000) {
+      if (this.IS_CHRISTMAS_EVENT_DAY) {
+        christmas_discount = -(1000 + 100 * (Number(date) - 1));
+      }
 
-    if (this.IS_CHRISTMAS_EVENT_DAY) {
-      christmas_discount = -(1000 + 100 * (Number(date) - 1));
-    }
+      if (this.IS_WEEKEND) {
+        let count = 0;
+        menuNameList.forEach((item) => {
+          if (this.findCategoryOfMenu(item) === '메인') {
+            count += menu[item];
+          }
+        });
+        weekend_discount = -2023 * count;
+      }
 
-    if (this.IS_WEEKEND) {
-      let count = 0;
-      menuNameList.forEach((item) => {
-        if (this.findCategoryOfMenu(item) === '메인') {
-          count += menu[item];
-        }
-      });
-      weekend_discount = -2023 * count;
-    }
+      if (this.IS_WEEKDAY) {
+        let count = 0;
+        menuNameList.forEach((item) => {
+          if (this.findCategoryOfMenu(item) === '디저트') {
+            count += menu[item];
+          }
+        });
+        weekday_discount = -2023 * count;
+      }
 
-    if (this.IS_WEEKDAY) {
-      let count = 0;
-      menuNameList.forEach((item) => {
-        if (this.findCategoryOfMenu(item) === '디저트') {
-          count += menu[item];
-        }
-      });
-      weekday_discount = -2023 * count;
-    }
-    if (this.IS_SPECIAL_EVENT) {
-      special_discount = -1000;
-    }
-    if (this.IS_GIFT_MENU) {
-      giftmenu_discount = -25000;
+      if (this.IS_SPECIAL_EVENT) {
+        special_discount = -1000;
+      }
+
+      if (this.IS_GIFT_MENU) {
+        giftmenu_discount = -25000;
+      }
     }
 
     return {
