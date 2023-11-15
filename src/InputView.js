@@ -1,12 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import ErrorCheck from './ErrorCheck.js';
+import { VISIT_DAY_QUESTION, ORDER_QUESTION } from './Constant.js';
 
 const InputView = {
   async readDate() {
     while (true) {
-      const input = await Console.readLineAsync(
-        '12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n',
-      );
+      const input = await Console.readLineAsync(VISIT_DAY_QUESTION);
       try {
         ErrorCheck.dateCheck(input);
         return input;
@@ -19,9 +18,7 @@ const InputView = {
 
   async readMenu(event_algorithm) {
     while (true) {
-      const input = await Console.readLineAsync(
-        '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)\n',
-      );
+      const input = await Console.readLineAsync(ORDER_QUESTION);
       const { menu, menuName, menuQuantity, menuNameList } =
         event_algorithm.userOrder(input);
 

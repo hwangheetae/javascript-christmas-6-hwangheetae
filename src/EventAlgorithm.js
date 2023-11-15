@@ -151,25 +151,25 @@ class EventAlgorithm {
     let giftmenu_discount = 0;
 
     if (totalPriceBeforeDisCount >= 10000) {
-      if (this.IS_CHRISTMAS_EVENT_DAY) {
+      if (this.isChristmasEventDay) {
         christmas_discount = -(1000 + 100 * (Number(date) - 1));
       }
 
-      if (this.IS_WEEKEND) {
+      if (this.isWeekend) {
         const count = this.countCategory(menuNameList, menu, '메인');
         weekend_discount = -2023 * count;
       }
 
-      if (this.IS_WEEKDAY) {
+      if (this.isWeekday) {
         const count = this.countCategory(menuNameList, menu, '디저트');
         weekday_discount = -2023 * count;
       }
 
-      if (this.IS_SPECIAL_EVENT) {
+      if (this.isSpecialEvent) {
         special_discount = -1000;
       }
 
-      if (this.IS_GIFT_MENU) {
+      if (this.isGiftMenu) {
         giftmenu_discount = -25000;
       }
     }
